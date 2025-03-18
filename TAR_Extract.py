@@ -90,30 +90,26 @@ class Window(QMainWindow):
             extract_file.extractall(study_path)
             extract_file.close()
 
-            log_file = study_path + '/' + study_folder[:36] + '\studyLog\DWS.log'
-
             destination_location = os.path.dirname(study_path)
 
-            log_copy = destination_location + '/DWS_' + str(date.today()).replace('-', '') + '.log'
+            log_copy = destination_location + '/' + str(date.today()).replace('-', '') + '.log'
 
             copy = shutil.copyfile(log_file, log_copy)
 
             with open(log_copy, 'r') as log:
                 log = log.readlines()
 
-            delete_319 = 'TactiSysArrowIndicator.cpp:319'
+            delete_line = 'insert line here'
 
             with open(log_copy, 'w') as log_update:
                 for line in log:
-                    # if delete_mag not in line:
-                    #     log_update.write(line)
-                    if delete_319 not in line:
+                    if delete_line not in line:
                         log_update.write(line)
 
 # Initializing application GUI 
 extract_gui = QApplication(sys.argv)
 
-# Displayinh GUI
+# Displaying GUI
 window = Window()
 window.show()
 
